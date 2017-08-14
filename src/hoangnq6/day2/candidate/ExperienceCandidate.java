@@ -16,9 +16,26 @@ import java.util.Date;
  * -----------------------------------------------------------------------
  * 08-08-2017 HoangNQ6 Create
  */
-public class ExperienceCandidate extends Candidate {
+public class ExperienceCandidate {
+
+	private int canID;
 	private int expInYear;
 	private String proSkill;
+
+	/**
+	 * @return the canID
+	 */
+	public int getCanID() {
+		return canID;
+	}
+
+	/**
+	 * @param canID
+	 *            the canID to set
+	 */
+	public void setCanID(int canID) {
+		this.canID = canID;
+	}
 
 	/**
 	 * @return the expInYear
@@ -50,29 +67,22 @@ public class ExperienceCandidate extends Candidate {
 		this.proSkill = proSkill;
 	}
 
+	
 	/**
-	 * @param candidateID
-	 * @param fullName
-	 * @param birthDate
-	 * @param phone
-	 * @param email
-	 * @param candidateType
-	 * @param listCertificated
+	 * @param canID
 	 * @param expInYear
 	 * @param proSkill
 	 */
-	public ExperienceCandidate(String candidateID, String fullName, Date birthDate, String phone, String email,
-			String candidateType, ArrayList<Certificated> listCertificated, int expInYear, String proSkill) {
-		super(candidateID, fullName, birthDate, phone, email, candidateType, listCertificated);
+	public ExperienceCandidate(int canID, int expInYear, String proSkill) {
+		super();
+		this.canID = canID;
 		this.expInYear = expInYear;
 		this.proSkill = proSkill;
 	}
 
-	@Override
 	public String showInfo() {
 		// TODO Auto-generated method stub
-		return super.showInfo()+"\n expInYear: "
-				+ this.getExpInYear() + "\n proSkill: " + this.getProSkill();
+		return "\n expInYear: " + this.getExpInYear() + "\n proSkill: " + this.getProSkill();
 	}
 
 }

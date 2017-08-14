@@ -18,13 +18,12 @@ import java.util.Scanner;
  * 08-08-2017 HoangNQ6 Create
  */
 public class ManagementCandidate {
-	ArrayList<Candidate> list = new ArrayList<>();
-
+//	ArrayList<Candidate> candidates = new ArrayList<>();
 	/**
 	 * 
 	 */
 	public void management() {
-
+		BO bo = new BO();
 	
 		while (true) {
 			System.err.println("====Nhập thông tin ứng viên đăng kí======\n");
@@ -39,14 +38,14 @@ public class ManagementCandidate {
 			System.out.println();
 
 			Scanner scanner2 = new Scanner(System.in);
-			Date birthDate;
+			String birthDate;
 			while (true) {
 				System.out.println("BirthDate : ");
-				String ns = scanner2.nextLine();
+				birthDate = scanner2.nextLine();
 
 				try {
-					birthDate = new Date(ns);
-					if (common.formatDateYear(birthDate))
+					Date birth = new Date(birthDate);
+					if (common.formatDateYear(birth))
 						break;
 					else
 						System.out.println("vui lòng nhập lại ngày sinh");
@@ -98,48 +97,80 @@ public class ManagementCandidate {
 			int expInYear = 0;
 			String proSkill = "";
 
-			Date graduationDate = null;
+			String graduationDate="";
 			String graduationRank = "";
 			String education = "";
 
 			String majors = "";
 			String semester = "";
 			String universityName = "";
-
+			
+			
 			switch (type) {
 			case 0:
 				candidateType = "Experience";
-				System.out.println();
-
-				Scanner scanner7 = new Scanner(System.in);
-				System.out.println("Số năm kinh nghiệm : ");
-				try {
-					expInYear = scanner7.nextInt();
-					if (common.checkExpInYear(expInYear))
-						break;
-					System.err.println("vui lòng nhập lại năm kinh nghiêm:");
-				} catch (Exception e) {
-					// TODO: handle exception
-					System.err.println("vui lòng nhập lại năm kinh nghiêm bằng số nguyên:");
-				}
-
-				Scanner scanner70 = new Scanner(System.in);
-				System.out.println("Kỹ năng chuyên môn  : ");
-				proSkill = scanner70.nextLine();
-				System.out.println();
 				break;
 
 			case 1:
 				candidateType = "Fresher";
+				break;
+
+			case 2:
+				candidateType = "Intern";
+				break;
+
+			default:
+				break;
+			}
+			
+			
+			Candidate can = new Candidate(candidateID, fullName, birthDate, phone, email, candidateType);
+			// thêm mới 1 candidate for dâtbase
+			bo.addCandidate(can);
+			int canID=bo.getCandidateIDForDatabase();
+			
+			switch (type) {
+			case 0:
+
+				
+				while(true){
+					Scanner scanner7 = new Scanner(System.in);
+					System.out.println("Số năm kinh nghiệm : ");
+					try {
+						expInYear = scanner7.nextInt();
+						if (common.checkExpInYear(expInYear))
+							break;
+						System.err.println("vui lòng nhập lại năm kinh nghiêm:");
+					} catch (Exception e) {
+						// TODO: handle exception
+						System.err.println("vui lòng nhập lại năm kinh nghiêm bằng số nguyên:");
+					}
+				}
+
+				Scanner scanner22 = new Scanner(System.in);
+				System.out.println("Kỹ năng chuyên môn  : ");
+				proSkill = scanner22.nextLine();
 				System.out.println();
-				Scanner scanner8 = new Scanner(System.in);
-				System.out.println("Thời gian tốt nghiệp  : ");
-				String dateTN = scanner8.nextLine();
-				try {
-					graduationDate = new Date(dateTN);
-				} catch (Exception e) {
-					// TODO: handle exception
-					System.err.println("vui lòng nhập lại graduationDate: ");
+				ExperienceCandidate can1 = new ExperienceCandidate(canID, expInYear, proSkill);
+				bo.addExperienceCandidate(can1);
+				break;
+
+			case 1:
+				System.out.println();
+				while(true){
+					Scanner scanner8 = new Scanner(System.in);
+					System.out.println("Thời gian tốt nghiệp  : ");
+					graduationDate = scanner8.nextLine();
+					try {
+						Date date = new Date(graduationDate);
+						if (common.formatDateYear(date))
+							break;
+						else
+							System.out.println("vui lòng nhập lại graduation Date");
+					} catch (Exception e) {
+						// TODO: handle exception
+						System.err.println("vui lòng nhập lại graduation Date: ");
+					}
 				}
 
 				System.out.println();
@@ -154,12 +185,14 @@ public class ManagementCandidate {
 
 				System.err.println();
 				System.out.println("trường tốt nghiệp : ");
-				education = scanner8.nextLine();
+				Scanner scanner84 = new Scanner(System.in);
+				education = scanner84.nextLine();
 				System.out.println("--------^-^----------");
+				FresherCandidate can2 = new FresherCandidate(canID, graduationDate, graduationRank, education);
+				bo.addFresherCandidate(can2);
 				break;
 
 			case 2:
-				candidateType = "Intern";
 
 				Scanner scanner9 = new Scanner(System.in);
 				System.out.println("Chuyên ngành đang học : ");
@@ -175,6 +208,8 @@ public class ManagementCandidate {
 				System.out.println("tên trường đang học : ");
 				universityName = scanner11.nextLine();
 				System.out.println("--------^-^----------");
+				InternCandidate can3 = new InternCandidate(canID, majors, semester, universityName);
+				bo.addInternCandidate(can3);
 				break;
 
 			default:
@@ -182,7 +217,7 @@ public class ManagementCandidate {
 			}
 
 			// add danh sách bằng cấp
-			ArrayList<Certificated> listCertificated = new ArrayList<>();
+//			ArrayList<Certificated> listCertificated = new ArrayList<>();
 			// số bằng cấp
 			int countCertificated = 0;
 
@@ -202,7 +237,7 @@ public class ManagementCandidate {
 				String certificatedID;
 				String certificateName;
 				String certificateRank;
-				Date ertificatedDate;
+				String ertificatedDate;
 
 				Scanner scanner13 = new Scanner(System.in);
 				System.out.println(" certificatedID: ");
@@ -219,11 +254,11 @@ public class ManagementCandidate {
 				Scanner scanner16 = new Scanner(System.in);
 				while (true) {
 					System.out.println("ertificatedDate : ");
-					String ns = scanner16.nextLine();
+					ertificatedDate = scanner16.nextLine();
 
 					try {
-						ertificatedDate = new Date(ns);
-						if (common.formatDateYear(ertificatedDate))
+						Date date1 = new Date(ertificatedDate);
+						if (common.formatDateYear(date1))
 							break;
 						else
 							System.err.println("vui lòng nhập lại ngày tốt nghiệp");
@@ -233,16 +268,15 @@ public class ManagementCandidate {
 					System.out.println();
 				}
 
-				Certificated certificated = new Certificated(certificatedID, certificateName, certificateRank,
-						ertificatedDate);
-				listCertificated.add(certificated);
+				Certificated certificated = new Certificated(canID, certificatedID, certificateName, certificateRank, ertificatedDate);
+				bo.addCertificated(certificated);
 				countCertificated--;
 
 			}
 			/*
 			 * 0: Experience Candidate 1: Fresher Candidate 2: Intern Candidate
 			 */
-			switch (type) {
+			/*switch (type) {
 			case 0:
 				ExperienceCandidate candidate1 = new ExperienceCandidate(candidateID, fullName, birthDate, phone, email,
 						candidateType, listCertificated, expInYear, proSkill);
@@ -263,13 +297,13 @@ public class ManagementCandidate {
 				break;
 			default:
 				break;
-			}
+			}*/
 			Scanner scanner3 = new Scanner(System.in);
 			System.out.print("bạn có muốn nhập thông tin ứng viên tiếp theo không? \n"
 					+ "nếu có hãy nhập ok \naction = ");
 			String ok=scanner3.nextLine();
 			if(!ok.equals("ok")){
-				
+				System.out.println("số ứng viên bạn vừa nhập vào là : "+can.canidateCount);
 				break;
 				
 			}
@@ -281,23 +315,24 @@ public class ManagementCandidate {
 	 * 
 	 * @param listCandidate
 	 */
-	public void showListCandidate(){
-		for(int i=0;i<list.size();i++){
-			Candidate can= list.get(i);
-			if(can instanceof FresherCandidate){
-				FresherCandidate candidate= (FresherCandidate) can;
-				System.err.println(" Tất cả thông tin của ứng viên thứ "+i+" là :\n");
-				System.out.println(candidate.showInfo());
-			}
-			if(can instanceof InternCandidate){
-				InternCandidate candidate1= (InternCandidate) can;
-				System.err.println(" Tất cả thông tin của ứng viên thứ "+i+" là :\n");
-				System.out.println(candidate1.showInfo());
-			}
-			if(can instanceof ExperienceCandidate ){
-				ExperienceCandidate candidate2= (ExperienceCandidate) can;
-				System.err.println(" Tất cả thông tin của ứng viên thứ "+i+" là :\n");
-				System.out.println(candidate2.showInfo());
+	public void showListCandidate(ArrayList<Candidate> candidates){
+		BO bo = new BO();
+		for (Candidate candidate : candidates) {
+			int canID = candidate.getCanID();
+			switch (candidate.getCandidateType()) {
+			case "Fresher":
+				System.out.println("qua Fresher");
+				System.out.println(candidate.showInfo()+ bo.getExperienceCandidate(canID).showInfo());
+				break;
+			case "Intern":
+				System.out.println(candidate.showInfo()+bo.getInternCandidate(canID).showInfo());
+				break;
+			case "Experience":
+				System.out.println(candidate.showInfo()+bo.getExperienceCandidate(canID).showInfo());
+				break;
+			default:
+				System.out.println("loi show nhes!!!");
+				break;
 			}
 		}
 	}
@@ -305,9 +340,12 @@ public class ManagementCandidate {
 		// TODO Auto-generated method stub
 		ManagementCandidate managementCandidate = new ManagementCandidate();
 		
-		managementCandidate.management();
+//		managementCandidate.management();
+		BO bo = new BO();
+		ArrayList<Candidate> candidates = bo.getListCandidate();
+		managementCandidate.showListCandidate(candidates);
 //		managementCandidate.showListCandidate(listCandidate);
-		managementCandidate.showListCandidate();
+//		managementCandidate.showListCandidate();
 	}
 
 }

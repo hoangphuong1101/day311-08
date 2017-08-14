@@ -16,10 +16,42 @@ import java.util.Date;
  * -----------------------------------------------------------------------
  * 08-08-2017 HoangNQ6 Create
  */
-public class InternCandidate extends Candidate {
+public class InternCandidate{
+	private int canID;
 	private String majors;
 	private String semester;
 	private String universityName;
+
+	/**
+	 * @param canID
+	 * @param majors
+	 * @param semester
+	 * @param universityName
+	 */
+	public InternCandidate(int canID, String majors, String semester, String universityName) {
+		super();
+		this.canID = canID;
+		this.majors = majors;
+		this.semester = semester;
+		this.universityName = universityName;
+	}
+
+
+	/**
+	 * @return the canID
+	 */
+	public int getCanID() {
+		return canID;
+	}
+
+
+	/**
+	 * @param canID the canID to set
+	 */
+	public void setCanID(int canID) {
+		this.canID = canID;
+	}
+
 
 	/**
 	 * @return the majors
@@ -28,13 +60,14 @@ public class InternCandidate extends Candidate {
 		return majors;
 	}
 
+
 	/**
-	 * @param majors
-	 *            the majors to set
+	 * @param majors the majors to set
 	 */
 	public void setMajors(String majors) {
 		this.majors = majors;
 	}
+
 
 	/**
 	 * @return the semester
@@ -43,13 +76,14 @@ public class InternCandidate extends Candidate {
 		return semester;
 	}
 
+
 	/**
-	 * @param semester
-	 *            the semester to set
+	 * @param semester the semester to set
 	 */
 	public void setSemester(String semester) {
 		this.semester = semester;
 	}
+
 
 	/**
 	 * @return the universityName
@@ -58,39 +92,18 @@ public class InternCandidate extends Candidate {
 		return universityName;
 	}
 
+
 	/**
-	 * @param universityName
-	 *            the universityName to set
+	 * @param universityName the universityName to set
 	 */
 	public void setUniversityName(String universityName) {
 		this.universityName = universityName;
 	}
 
-	/**
-	 * @param candidateID
-	 * @param fullName
-	 * @param birthDate
-	 * @param phone
-	 * @param email
-	 * @param candidateType
-	 * @param listCertificated
-	 * @param majors
-	 * @param semester
-	 * @param universityName
-	 */
-	public InternCandidate(String candidateID, String fullName, Date birthDate, String phone, String email,
-			String candidateType, ArrayList<Certificated> listCertificated, String majors, String semester,
-			String universityName) {
-		super(candidateID, fullName, birthDate, phone, email, candidateType, listCertificated);
-		this.majors = majors;
-		this.semester = semester;
-		this.universityName = universityName;
-	}
 
-	@Override
 	public String showInfo() {
 		// TODO Auto-generated method stub
-		return super.showInfo()+"\n majors: "
+		return "\n majors: "
 				+ this.majors + "\n semester: " + this.semester + "\n universityName: " + this.universityName;
 	}
 

@@ -17,15 +17,66 @@ import java.util.Date;
  * 08-08-2017 HoangNQ6 Create
  */
 public class Candidate {
+	private int canID;
 	private String candidateID;
 	private String fullName;
-	private Date birthDate;
+	private String birthDate;
 	private String phone;
 	private String email;
 	private String candidateType;
-	static int canidateCount;
+	static int canidateCount=0;
 	private ArrayList<Certificated> listCertificated= new ArrayList<>();
 
+	
+	/**
+	 * @param canID
+	 * @param candidateID
+	 * @param fullName
+	 * @param birthDate
+	 * @param phone
+	 * @param email
+	 * @param candidateType
+	 * @param listCertificated
+	 */
+	public Candidate(int canID, String candidateID, String fullName, String birthDate, String phone, String email,
+			String candidateType, ArrayList<Certificated> listCertificated) {
+		super();
+		this.canID = canID;
+		this.candidateID = candidateID;
+		this.fullName = fullName;
+		this.birthDate = birthDate;
+		this.phone = phone;
+		this.email = email;
+		this.candidateType = candidateType;
+		this.listCertificated = listCertificated;
+	}
+
+
+	/**
+	 * @param canID the canID to set
+	 */
+	public void setCanID(int canID) {
+		this.canID = canID;
+	}
+
+
+	/**
+	 * 
+	 */
+	public Candidate() {
+		super();
+		canidateCount++;
+	}
+
+
+	/**
+	 * @return the canID
+	 */
+	public int getCanID() {
+		return canID;
+	}
+
+	
 	/**
 	 * @return the listCertificated
 	 */
@@ -73,7 +124,7 @@ public class Candidate {
 	/**
 	 * @return the birthDate
 	 */
-	public Date getBirthDate() {
+	public String getBirthDate() {
 		return birthDate;
 	}
 
@@ -81,7 +132,7 @@ public class Candidate {
 	 * @param birthDate
 	 *            the birthDate to set
 	 */
-	public void setBirthDate(Date birthDate) {
+	public void setBirthDate(String birthDate) {
 		this.birthDate = birthDate;
 	}
 
@@ -148,7 +199,7 @@ public class Candidate {
 	 * @param candidateType
 	 * @param listCertificated
 	 */
-	public Candidate(String candidateID, String fullName, Date birthDate, String phone, String email,
+	public Candidate(String candidateID, String fullName, String birthDate, String phone, String email,
 			String candidateType, ArrayList<Certificated> listCertificated) {
 		super();
 		this.candidateID = candidateID;
@@ -158,6 +209,29 @@ public class Candidate {
 		this.email = email;
 		this.candidateType = candidateType;
 		this.listCertificated = listCertificated;
+		canidateCount++;
+	}
+
+	
+	
+	/**
+	 * @param candidateID
+	 * @param fullName
+	 * @param birthDate
+	 * @param phone
+	 * @param email
+	 * @param candidateType
+	 */
+	public Candidate(String candidateID, String fullName, String birthDate, String phone, String email,
+			String candidateType) {
+		super();
+		this.candidateID = candidateID;
+		this.fullName = fullName;
+		this.birthDate = birthDate;
+		this.phone = phone;
+		this.email = email;
+		this.candidateType = candidateType;
+		canidateCount++;
 	}
 
 	/**
@@ -168,13 +242,31 @@ public class Candidate {
 		canidateCount++;
 	}
 	
+	/**
+	 * kiểm tra số lượng ứng viên được nhập
+	 * 
+	 */
+	public void showNumberCandidate(){
+		System.out.println("số lượng ứng viên được nhập vào là "+ canidateCount);
+	}
+	
+	/**
+	 * hiển thị danh sách các bằng tốt nghiệp của mỗi loại ứng viên
+	 * @param listCertificated
+	 * @return
+	 */
 	public String showListCertificated(ArrayList<Certificated> listCertificated){
 		String show="";
 		for(int i=0;i<listCertificated.size();i++){
-			show=show+"\nThông tin bằng thứ "+i+" là: \n "+listCertificated.get(i).toString();
+			show=show+"\nThông tin bằng thứ "+i+" là: \n "+listCertificated.get(i).showInfo();
 		}
 		return show;
 	}
+	
+	/**
+	 * hiển thi thông tin của 1 ứng viên
+	 * @return
+	 */
 	public String showInfo () {
 		// TODO Auto-generated method stub
 		return "candidateID: " + this.getCandidateID() + "\n fullName: " + this.getFullName() + "\n birthDate: "

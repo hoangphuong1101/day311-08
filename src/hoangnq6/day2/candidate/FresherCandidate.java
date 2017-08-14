@@ -16,15 +16,45 @@ import java.util.Date;
  * -----------------------------------------------------------------------
  * 08-08-2017 HoangNQ6 Create
  */
-public class FresherCandidate extends Candidate {
-	private Date graduationDate;
+public class FresherCandidate {
+	private int canID;
+	private String graduationDate;
 	private String graduationRank;
 	private String education;
 
 	/**
+	 * @param canID
+	 * @param graduationDate
+	 * @param graduationRank
+	 * @param education
+	 */
+	public FresherCandidate(int canID, String graduationDate, String graduationRank, String education) {
+		super();
+		this.canID = canID;
+		this.graduationDate = graduationDate;
+		this.graduationRank = graduationRank;
+		this.education = education;
+	}
+
+	/**
+	 * @return the canID
+	 */
+	public int getCanID() {
+		return canID;
+	}
+
+	/**
+	 * @param canID
+	 *            the canID to set
+	 */
+	public void setCanID(int canID) {
+		this.canID = canID;
+	}
+
+	/**
 	 * @return the graduationDate
 	 */
-	public Date getGraduationDate() {
+	public String getGraduationDate() {
 		return graduationDate;
 	}
 
@@ -32,7 +62,7 @@ public class FresherCandidate extends Candidate {
 	 * @param graduationDate
 	 *            the graduationDate to set
 	 */
-	public void setGraduationDate(Date graduationDate) {
+	public void setGraduationDate(String graduationDate) {
 		this.graduationDate = graduationDate;
 	}
 
@@ -66,31 +96,9 @@ public class FresherCandidate extends Candidate {
 		this.education = education;
 	}
 
-	/**
-	 * @param candidateID
-	 * @param fullName
-	 * @param birthDate
-	 * @param phone
-	 * @param email
-	 * @param candidateType
-	 * @param listCertificated
-	 * @param graduationDate
-	 * @param graduationRank
-	 * @param education
-	 */
-	public FresherCandidate(String candidateID, String fullName, Date birthDate, String phone, String email,
-			String candidateType, ArrayList<Certificated> listCertificated, Date graduationDate, String graduationRank,
-			String education) {
-		super(candidateID, fullName, birthDate, phone, email, candidateType, listCertificated);
-		this.graduationDate = graduationDate;
-		this.graduationRank = graduationRank;
-		this.education = education;
-	}
-
-	@Override
 	public String showInfo() {
 		// TODO Auto-generated method stub
-		return super.showInfo()+"\n graduationDate: "
-				+ this.graduationDate + "\n graduationRank: " + this.graduationRank + "\n education: " + this.education;
+		return "\n graduationDate: " + this.graduationDate + "\n graduationRank: "
+				+ this.graduationRank + "\n education: " + this.education;
 	}
 }

@@ -29,7 +29,7 @@ public class common {
 		Date date = new Date();
 		int namSinh = inDate.getYear() + 1900;
 		int namHienTai = date.getYear() + 1900;
-		if (namSinh >= 1990 && namSinh <= namHienTai)
+		if (namSinh >= 1900 && namSinh <= namHienTai)
 			return true;
 		return false;
 	}
