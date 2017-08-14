@@ -321,14 +321,15 @@ public class ManagementCandidate {
 			int canID = candidate.getCanID();
 			switch (candidate.getCandidateType()) {
 			case "Fresher":
-				System.out.println("qua Fresher");
-				System.out.println(candidate.showInfo()+ bo.getExperienceCandidate(canID).showInfo());
+				FresherCandidate can1 = bo.getFresherCandidate(canID);
+				System.out.println(candidate.showInfo()+can1.showInfo());
 				break;
 			case "Intern":
-				System.out.println(candidate.showInfo()+bo.getInternCandidate(canID).showInfo());
+				InternCandidate can2 = bo.getInternCandidate(canID);
+				System.out.println(candidate.showInfo()+can2.showInfo());
 				break;
 			case "Experience":
-				System.out.println(candidate.showInfo()+bo.getExperienceCandidate(canID).showInfo());
+				System.out.println(candidate.showInfo());
 				break;
 			default:
 				System.out.println("loi show nhes!!!");
@@ -336,6 +337,20 @@ public class ManagementCandidate {
 			}
 		}
 	}
+	
+	public void showAllFullName(ArrayList<Candidate> candidates){
+		StringBuffer allFullName= new StringBuffer();
+		for (Candidate candidate : candidates) {
+			allFullName.append(candidate.getFullName()+" ");
+		}
+		System.err.println("tên của tất cả các candidate là: ");
+		System.out.println(allFullName.toString());
+	}
+	
+	/**
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		ManagementCandidate managementCandidate = new ManagementCandidate();
@@ -344,8 +359,7 @@ public class ManagementCandidate {
 		BO bo = new BO();
 		ArrayList<Candidate> candidates = bo.getListCandidate();
 		managementCandidate.showListCandidate(candidates);
-//		managementCandidate.showListCandidate(listCandidate);
-//		managementCandidate.showListCandidate();
+		managementCandidate.showAllFullName(candidates);
 	}
 
 }

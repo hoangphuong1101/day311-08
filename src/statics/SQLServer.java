@@ -8,7 +8,7 @@ public class SQLServer {
 	
 	public static String url = "jdbc:sqlserver://localhost:1433;databaseName=CANDIDATE";
 	public static String userName = "sa";
-	public static String password = "Hoangnguyen1621993";
+	public static String password = "gatrong162";
 	
 	public static Connection connection;
 	// connect database 

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class TestMain {
-	ArrayList<Candidate> can = new ArrayList<>();
+	/*ArrayList<Candidate> can = new ArrayList<>();
 
 	ArrayList<Certificated> listCertificated = new ArrayList<>();
 
@@ -50,13 +50,18 @@ public class TestMain {
 			}
 		}
 	}
-
+*/
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		TestMain c = new TestMain();
+		/*TestMain c = new TestMain();
 		c.addCertificated();
 		c.addCan();
-		c.showCan();
+		c.showCan();*/
+		StringBuffer sb = new StringBuffer();
+		for (int i = 0; i < 10; i++) {
+		    sb.append(i);
+		}
+		System.out.println(sb.toString());
 
 	}
 

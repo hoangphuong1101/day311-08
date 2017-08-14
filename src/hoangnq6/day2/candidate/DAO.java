@@ -71,7 +71,7 @@ public class DAO {
 		PreparedStatement pr = null;
 		try {
 
-			String sql = "insert into InternCandidate(canID, expInYear, proSkill)" + " VALUES(?,?,?)";
+			String sql = "insert into ExperienceCandidate(canID, expInYear, proSkill)" + " VALUES(?,?,?)";
 			pr = SQLServer.connection.prepareStatement(sql);
 			pr.setInt(1, can.getCanID());
 			pr.setInt(2, can.getExpInYear());
